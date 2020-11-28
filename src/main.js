@@ -8,3 +8,6 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+import plugin from "@/plugin/plugin";
+Vue.use(plugin);
