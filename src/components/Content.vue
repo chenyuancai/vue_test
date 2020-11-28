@@ -101,7 +101,7 @@ export default {
             var smonth = 0;
             var flage = false;
             var fflage = true;
-            alert(parseInt(this.nowMonth))
+            // alert(parseInt(this.nowMonth))
             if (parseInt(this.nowMonth) == 1) {
                 sday = this.manyday(this.nowYear - 1, 12);
                 mmyear = this.nowYear - 1;
