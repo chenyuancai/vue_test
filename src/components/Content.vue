@@ -27,8 +27,8 @@
                     <div class="content_back" @click="back">回到当日</div>
                 </div>
 
-                <div class="content_kuang_five_p7" v-if="p7">
-                    <div class="content_kuang_five_pp7">
+                <div class="content_kuang_five_dath" v-if="p7">
+                    <div class="content_kuang_five_nowdath">
                         <span v-for="(item, index) in Mmeek" :key="index">{{
                 item
               }}</span>
@@ -37,13 +37,14 @@
                 </div>
             </div>
 
-            <div class="content_kuang_five_p7" v-if="cfive">
+            <div class="content_kuang_five_dath" v-if="cfive">
                 <div class="content_kuang_five_style">
-                    <div class="content_kuang_five_pp7">
+                    <div class="content_kuang_five_nowdath">
                         <div class="quanquan" v-for="(item, index) in stryear" :key="index" :value="stryear[index]">
                             {{ item.yes }}
                             <span class="test" @click="onTest">+</span>
                             <div class="show" v-show="item.flag"></div>
+                            <div class="showgrey" v-show="item.flags"></div>
                         </div>
 
                     </div>
@@ -99,6 +100,7 @@ export default {
             var mmyear = 0;
             var smonth = 0;
             var flage = false;
+            var fflage = true;
             if (parseInt(this.nowMonth) == 1) {
                 sday = this.manyday(this.nowYear - 1, 12);
                 mmyear = this.nowYear - 1;
@@ -156,13 +158,15 @@ export default {
             if (dday == 0) {
                 this.stryear = [];
             } else {
+                fflage = true;
                 for (var i = sday - dday + 1; i <= sday; i++) {
                     this.stryear.push({
                         yes: i,
                         ssyear: mmyear,
                         ssdate: this.nowMonth - 1,
                         ssday: i,
-                        flag: flage
+                        flag: flage,
+                        flags: fflage
                     });
                 }
             }
@@ -173,22 +177,31 @@ export default {
                 } else {
                     flage = false;
                 }
+
+                if (mmyear == new Date().getFullYear() && mmmonth - 1 == new Date().getMonth() + 1) {
+                    fflage = false;
+                } else {
+                    fflage = true;
+                }
                 this.stryear.push({
                     yes: i,
                     ssyear: this.nowYear,
                     ssdate: mmmonth - 1,
                     ssday: i,
-                    flag: flage
+                    flag: flage,
+                    flags: fflage
                 });
             }
             if (last < 6) {
+                fflage = true;
                 for (var i = 1; i <= 6 - last; i++) {
                     this.stryear.push({
                         yes: i,
                         ssyear: mmyear,
                         ssdate: mmmonth,
                         ssday: i,
-                        flag: flage
+                        flag: flage,
+                        flags: fflage
                     });
                 }
             }
@@ -215,6 +228,7 @@ export default {
             var mmyear = 0;
             var smonth = 0;
             var flage = false;
+            var fflage = true;
             if (parseInt(this.nowMonth) == 1) {
                 sday = this.manyday(this.nowYear - 1, 12);
                 mmyear = this.nowYear - 1;
@@ -271,7 +285,8 @@ export default {
                         ssyear: mmyear - 1,
                         ssdate: this.nowMonth - 1,
                         ssday: i,
-                        flag: flage
+                        flag: flage,
+                        flags: fflage
                     });
                 }
             }
@@ -282,12 +297,20 @@ export default {
                 } else {
                     flage = false;
                 }
+
+                if (mmyear == new Date().getFullYear() && mmmonth - 1 == new Date().getMonth() + 1) {
+                    fflage = false;
+                } else {
+                    fflage = true;
+                }
+
                 this.stryear.push({
                     yes: i,
                     ssyear: this.nowYear,
                     ssdate: mmmonth - 1,
                     ssday: i,
-                    flag: flage
+                    flag: flage,
+                    flags: fflage
                 });
             }
             if (last < 6) {
@@ -297,7 +320,8 @@ export default {
                         ssyear: mmyear,
                         ssdate: mmmonth,
                         ssday: i,
-                        flag: flage
+                        flag: flage,
+                        flags: fflage
                     });
                 }
             }
@@ -592,7 +616,7 @@ export default {
     font-size: 30px;
 }
 
-.content_all_style .content_all_ymw .content_kuang_five_p7 {
+.content_all_style .content_all_ymw .content_kuang_five_dath {
     // border: yellow 1px solid;
     width: 870px;
     height: 80px;
@@ -600,14 +624,14 @@ export default {
     justify-content: center;
 }
 
-.content_all_style .content_all_ymw .content_kuang_five_p7 .content_kuang_five_pp7 {
+.content_all_style .content_all_ymw .content_kuang_five_dath .content_kuang_five_nowdath {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.content_all_style .content_all_ymw .content_kuang_five_p7 .content_kuang_five_pp7 span {
+.content_all_style .content_all_ymw .content_kuang_five_dath .content_kuang_five_nowdath span {
     width: 132px;
     line-height: 80px;
     height: 80px;
@@ -617,7 +641,7 @@ export default {
     position: relative;
 }
 
-.content_all_style .content_all_ymw .content_kuang_five_p7 .content_kuang_five_pp7 div {
+.content_all_style .content_all_ymw .content_kuang_five_dath .content_kuang_five_nowdath div {
     width: 132px;
     line-height: 80px;
     height: 80px;
@@ -634,6 +658,7 @@ export default {
     height: 80px;
     line-height: 80px;
     border: 1px grey solid;
+    border-radius: 5px;
 }
 
 .quanquan:hover {
@@ -675,6 +700,17 @@ export default {
     top: 5px;
     right: 25px;
     opacity: 0.5;
+}
+
+.showgrey {
+    // // display: inline-block;
+    // background-color: grey;
+    // width: 122.27px;
+    // // text-align: center;
+    // height: 80px;
+    // opacity: 0.2;
+    // position: relative;
+    // top: -80px;
 }
 
 .quanquan:hover .test {
@@ -733,13 +769,5 @@ export default {
 
 .content_btn:hover {
     display: block;
-}
-
-.content_dath {
-    // width: 770px;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // font: bolder;
 }
 </style>
