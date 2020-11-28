@@ -88,7 +88,7 @@ export default {
         nowYear(val, oldval) {
             console.log("nowYearswitck()...");
             this.nowYear = this.nowYear;
-            // this.nowMonth = this.nowMonth;
+            this.nowMonth = this.nowMonth;
             // alert(this.nowYear)
             console.log("改变年：" + this.nowYear);
             console.log("改变年：" + this.nowMonth);
@@ -101,6 +101,7 @@ export default {
             var smonth = 0;
             var flage = false;
             var fflage = true;
+            alert(parseInt(this.nowMonth))
             if (parseInt(this.nowMonth) == 1) {
                 sday = this.manyday(this.nowYear - 1, 12);
                 mmyear = this.nowYear - 1;
@@ -172,13 +173,13 @@ export default {
             }
 
             for (var i = 1; i <= mday; i++) {
-                if (mmyear == new Date().getFullYear() && mmmonth - 1 == new Date().getMonth() + 1 && new Date().getDate() == i) {
+                if (mmyear == new Date().getFullYear() && mmmonth == parseInt(new Date().getMonth() + 1) && new Date().getDate() == i) {
                     flage = true;
                 } else {
                     flage = false;
                 }
 
-                if (mmyear == new Date().getFullYear() && mmmonth - 1 == new Date().getMonth() + 1) {
+                if (mmyear == new Date().getFullYear() && mmmonth - 1 == parseInt(new Date().getMonth() + 1)) {
                     fflage = false;
                 } else {
                     fflage = true;
@@ -186,7 +187,7 @@ export default {
                 this.stryear.push({
                     yes: i,
                     ssyear: this.nowYear,
-                    ssdate: mmmonth - 1,
+                    ssdate: mmmonth + 1,
                     ssday: i,
                     flag: flage,
                     flags: fflage
@@ -198,7 +199,7 @@ export default {
                     this.stryear.push({
                         yes: i,
                         ssyear: mmyear,
-                        ssdate: mmmonth,
+                        ssdate: mmmonth + 1,
                         ssday: i,
                         flag: flage,
                         flags: fflage
@@ -208,12 +209,12 @@ export default {
             // this.StartTime();
 
             if (this.nowYear) {}
-
+            console.log(this.stryear);
             console.log(this.Allday);
         },
         nowMonth(val, oldval) {
             console.log("comenowMonthswitch()...");
-            this.nowMonth = this.nowMonth;
+            // this.nowMonth = this.nowMonth;
             // alert(this.nowMonth)
             console.log("改变月：" + this.nowYear);
             console.log("改变月：" + this.nowMonth);
@@ -292,13 +293,14 @@ export default {
             }
 
             for (var i = 1; i <= mday; i++) {
-                if (mmyear == new Date().getFullYear() && mmmonth - 1 == new Date().getMonth() + 1 && new Date().getDate() == i) {
+                if (mmyear == new Date().getFullYear() && mmmonth - 1 == parseInt(new Date().getMonth() + 1) && new Date().getDate() == i) {
+                    // alert(mmmonth - 1 + "---" + parseInt(new Date().getMonth() + 1))
                     flage = true;
                 } else {
                     flage = false;
                 }
 
-                if (mmyear == new Date().getFullYear() && mmmonth - 1 == new Date().getMonth() + 1) {
+                if (mmyear == new Date().getFullYear() && mmmonth - 1 == parseInt(new Date().getMonth() + 1)) {
                     fflage = false;
                 } else {
                     fflage = true;
@@ -318,7 +320,7 @@ export default {
                     this.stryear.push({
                         yes: i,
                         ssyear: mmyear,
-                        ssdate: mmmonth,
+                        ssdate: mmmonth + 1,
                         ssday: i,
                         flag: flage,
                         flags: fflage
